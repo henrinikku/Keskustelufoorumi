@@ -5,6 +5,7 @@ Sovelluksen avulla käyttäjät voivat luoda ja käsitellä aihealueita/kategori
 Sovelluksessa on ainakin kolme käyttäjäroolia, _peruskäyttäjä_, _premium-käyttäjä_ ja _ylläpitäjä_. Rekisteröitymisen yhteydessä luodaan peruskäyttäjä.
 
 Peruskäyttäjät voivat
+- hakea keskusteluita esimerkiksi avainsanojen perusteella
 - aloittaa keskusteluita
 - vastata keskusteluihin
 - muokata vastauksiaan
