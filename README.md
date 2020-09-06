@@ -18,4 +18,5 @@ Ylläpitäjät voivat tehdä kaiken mitä premium-käyttäjät, ja lisäksi
 - ylentää tai alentaa käyttäjiä (esim. peruskäyttäjä -> premium-käyttäjä)
 - poistaa käyttäjiä
 - poistaa aihealueita
+- poistaa ketjuja
 - poistaa viestejä
