@@ -2,7 +2,7 @@
 Sovelluksen avulla käyttäjät voivat luoda ja käsitellä aihealueita/kategorioita, ja keskustella niiden alla. 
 
 ## Toiminnallisuus
-Sovelluksessa on ainakin kolme käyttäjäroolia, _peruskäyttäjä_, _premium-käyttäjä_ ja _ylläpitäjä_. Rekisteröitymisen yhteydessä luodaan normaali käyttäjä
+Sovelluksessa on ainakin kolme käyttäjäroolia, _peruskäyttäjä_, _premium-käyttäjä_ ja _ylläpitäjä_. Rekisteröitymisen yhteydessä luodaan peruskäyttäjä.
 
 Peruskäyttäjät voivat
 - aloittaa keskusteluita
