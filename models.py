@@ -1,4 +1,5 @@
 from app import db
+from flask_sqlalchemy import SQLAlchemy
 
 
 class BaseModel(db.Model):
@@ -13,3 +14,4 @@ class BaseModel(db.Model):
 class User(BaseModel):
     __tablename__ = "User"
     username = db.Column(db.String(), unique=True)
+    password = db.Column(db.String())
