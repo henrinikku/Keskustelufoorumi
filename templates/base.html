@@ -1,3 +1,5 @@
+{% from "components.html" import link with context %}
+
 <!DOCTYPE html>
 <html>
 
@@ -19,18 +21,13 @@
             <div class="container">
                 <div id="navbarMenuHeroA" class="navbar-menu">
                     <div class="navbar-end">
-                        <a href="{{ url_for('root.index') }}"
-                           class="navbar-item">
-                            Home
-                        </a>
-                        <a href="{{ url_for('auth.login') }}"
-                           class="navbar-item">
-                            Login
-                        </a>
-                        <a href="{{ url_for('auth.register') }}"
-                           class="navbar-item">
-                            Register
-                        </a>
+                        {% if current_user.is_authenticated %}
+                            {{ link(to="root.index", text="Home") }}
+                            {{ link(to="auth.logout", text="Log out") }}
+                        {% else %}
+                            {{ link(to="auth.login", text="Log in") }}
+                            {{ link(to="auth.register", text="Register") }}
+                        {% endif %}
                     </div>
                 </div>
             </div>

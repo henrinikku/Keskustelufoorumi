@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template, url_for, redirect, request, flash
+from flask_login import login_user, logout_user, current_user
 from werkzeug.security import check_password_hash
 
-from app import db
+from db import db
 from models import User
+from forms import RegisterForm
 
 auth = Blueprint("auth", __name__)
 
@@ -50,10 +52,11 @@ def login_post():
         flash("Incorrect credentials")
         return redirect(url_for("auth.login"))
 
-    # TODO Session management
+    login_user(user)
     return redirect(url_for("root.index"))
 
 
 @auth.route("/logout")
 def logout():
-    return "Logout"
+    logout_user()
+    return redirect(url_for("auth.login"))

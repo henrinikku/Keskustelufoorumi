@@ -2,21 +2,27 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import import_string
+
+from db import db
+from login_manager import login_manager
+from routes import root, auth
 
 load_dotenv()
 
 app = Flask(__name__)
 
+# Load configuration
 config = import_string(os.environ.get("APP_SETTINGS"))
 app.config.from_object(config())
 
-db = SQLAlchemy(app)
+# Register db
+db.init_app(app)
 
-# TODO Fix this?
-from routes import *
+# Register login manager
+login_manager.init_app(app)
 
+# Register routes
 app.register_blueprint(root)
 app.register_blueprint(auth, url_prefix="/auth")
 

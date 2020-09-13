@@ -1,2 +1,2 @@
-from .root import root
 from .auth import auth
+from .root import root

@@ -1,0 +1,5 @@
+{% macro link(to, text) %}
+    <a href="{{ url_for(to) }}" class="navbar-item">
+        {{ text }}
+    </a>
+{% endmacro %}
