@@ -1,15 +1,28 @@
-from werkzeug.security import generate_password_hash
+import enum
+
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
 
 from db import db
 from . import BaseModel
 
 
+# Names, not values, are persisted
+class UserRole(enum.Enum):
+    normal = 1
+    premium = 2
+    admin = 3
+
+
 class User(BaseModel, UserMixin):
     __tablename__ = "User"
 
-    username = db.Column(db.String(), unique=True)
-    password = db.Column(db.String())
+    username = db.Column(db.String(), unique=True, nullable=False)
+    password = db.Column(db.String(), nullable=False)
+    role = db.Column(
+        db.Enum(UserRole), nullable=False,
+        default=UserRole.normal.name, server_default=UserRole.normal.name,
+    )
 
     def __init__(self, **kwargs):
         password = kwargs.pop("password")
