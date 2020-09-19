@@ -23,8 +23,8 @@
                     <div class="navbar-end">
                         {% if current_user.is_authenticated %}
                             {{ link(to="root.index", text="Home") }}
-                            {% if current_user.role.name == "admin" %}
-                                {{ link(to="admin.users", text="Manage users") }}
+                            {% if current_user.is_admin() %}
+                                {{ link(to="admin.index", text="Manage site") }}
                             {% endif %}
                             {{ link(to="auth.logout", text="Log out") }}
                         {% else %}
@@ -37,11 +37,10 @@
         </nav>
     </div>
 
-    <div class="hero-body">
-        <div class="container has-text-centered has-text-dark">
-            {% block content %}
-            {% endblock %}
-        </div>
+    <div class="container has-text-centered has-text-dark">
+        <br/><br/>
+        {% block content %}
+        {% endblock %}
     </div>
 </section>
 </body>

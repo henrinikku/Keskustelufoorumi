@@ -28,3 +28,9 @@ class User(BaseModel, UserMixin):
         password = kwargs.pop("password")
         hashed_password = generate_password_hash(password)
         super(User, self).__init__(password=hashed_password, **kwargs)
+
+    def is_admin(self):
+        return self.role == UserRole.admin
+
+    def is_premium(self):
+        return self.role in [UserRole.admin, UserRole.premium]
