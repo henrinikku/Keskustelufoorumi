@@ -1,10 +1,9 @@
 from flask import Blueprint, render_template, url_for, redirect, request, flash
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user
 from werkzeug.security import check_password_hash
 
 from db import db
 from models import User
-from forms import RegisterForm
 
 auth = Blueprint("auth", __name__)
 
@@ -16,19 +15,28 @@ def register():
 
 @auth.route("/register", methods=["POST"])
 def register_post():
-    # TODO Use Flask-WTF https://flask-wtf.readthedocs.io/en/latest/
     username = request.form.get("username")
     password = request.form.get("password")
     password_again = request.form.get("password_again")
 
-    if not username or not password or password != password_again:
-        flash("username is invalid or passwords do not match")
-        return redirect(url_for("auth.register"))
+    register_url = url_for("auth.register")
+
+    if not username or len(username) < 3:
+        flash("Username is invalid")
+        return redirect(register_url)
 
     old_user = User.query.filter_by(username=username).first()
     if old_user:
-        flash("username is taken")
-        return redirect(url_for("auth.register"))
+        flash("Username is taken")
+        return redirect(register_url)
+
+    if not password or len(password) < 8:
+        flash("Password is invalid")
+        return redirect(register_url)
+
+    if not password == password_again:
+        flash("Passwords do not match")
+        return redirect(register_url)
 
     user = User(username=username, password=password)
     db.session.add(user)

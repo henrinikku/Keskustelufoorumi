@@ -23,6 +23,9 @@
                     <div class="navbar-end">
                         {% if current_user.is_authenticated %}
                             {{ link(to="root.index", text="Home") }}
+                            {% if current_user.role.name == "admin" %}
+                                {{ link(to="admin.users", text="Manage users") }}
+                            {% endif %}
                             {{ link(to="auth.logout", text="Log out") }}
                         {% else %}
                             {{ link(to="auth.login", text="Log in") }}
