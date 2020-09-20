@@ -1,6 +1,13 @@
 # Keskustelufoorumi
 Sovelluksen avulla käyttäjät voivat luoda ja käsitellä aihealueita/kategorioita, ja keskustella niiden alla. 
 
+## Tilanne 20.09.2020
+Sovellus on vielä todella keskeneräinen. Toteutettuna on käytännössä ainastaan rekisteröityminen, kirjautuminen ja (admin-käyttäjällä) käyttäjien poistaminen.
+
+## Admin-tunnukset testausta varten
+Käyttäjänimi: admin
+Salasana: testi123
+
 ## Toiminnallisuus
 Sovelluksessa on ainakin kolme käyttäjäroolia, _peruskäyttäjä_, _premium-käyttäjä_ ja _ylläpitäjä_. Rekisteröitymisen yhteydessä luodaan peruskäyttäjä.
 
