@@ -1,0 +1,30 @@
+{% extends "admin.html" %}
+
+{% block admin_content %}
+    <div class="card-table">
+        <div class="content">
+            <table class="table is-fullwidth is-striped">
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td width="5%"><i class="fa fa-user"></i></td>
+                        <td align="left">{{ user.username }}</td>
+                        <td align="right">
+                            <a class="button is-small is-info"
+                               href="{{ url_for("admin.edit_user", id=user.id) }}">
+                                Edit
+                            </a>
+                        </td>
+                        <td align="right">
+                            <a class="button is-small is-danger"
+                               href="{{ url_for("admin.delete_user", id=user.id) }}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

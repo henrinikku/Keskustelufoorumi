@@ -2,7 +2,7 @@ from functools import wraps
 
 from flask_login import current_user
 
-from plugins.login_manager import login_manager
+from application.login_manager import login_manager
 
 
 def is_admin_user(func):
@@ -12,7 +12,7 @@ def is_admin_user(func):
 
     @wraps(func)
     def inner(*args, **kwargs):
-        if current_user.is_admin():
+        if current_user.is_authenticated and current_user.is_admin():
             return func(*args, **kwargs)
 
         return login_manager.unauthorized()
@@ -27,7 +27,7 @@ def is_premium_user(func):
 
     @wraps(func)
     def inner(*args, **kwargs):
-        if current_user.is_premium():
+        if current_user.is_authenticated and current_user.is_premium():
             return func(*args, **kwargs)
 
         return login_manager.unauthorized()
@@ -42,7 +42,7 @@ def is_normal_user(func):
 
     @wraps(func)
     def inner(*args, **kwargs):
-        if current_user.is_normal():
+        if current_user.is_authenticated:
             return func(*args, **kwargs)
 
         return login_manager.unauthorized()

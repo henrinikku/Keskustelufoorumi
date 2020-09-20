@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from decorators.permissions import is_normal_user
+from application.decorators.permissions import is_normal_user
 
 root = Blueprint("root", __name__)
 

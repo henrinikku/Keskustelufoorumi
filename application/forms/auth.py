@@ -1,6 +1,6 @@
 from wtforms import validators
 
-from forms.base import (
+from application.forms.base import (
     BaseForm, StyledStringField, StyledPasswordField,
     StyledSubmitField,
 )

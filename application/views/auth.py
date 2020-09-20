@@ -2,9 +2,9 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash
 from flask_login import login_user, logout_user
 from werkzeug.security import check_password_hash
 
-from forms.auth import RegisterForm, LoginForm
-from models import User
-from plugins.db import db
+from application.forms.auth import RegisterForm, LoginForm
+from application.models import User
+from application.queries.user import add_user, by_username
 
 auth = Blueprint("auth", __name__)
 
@@ -21,15 +21,13 @@ def register_post():
     if not form.validate_and_flash_errors():
         return redirect(url_for("auth.register"))
 
-    existing_user = User.query.filter_by(username=form.username.data).first()
-    
+    existing_user = by_username(form.username.data)
+
     if existing_user:
         flash("Username is taken")
         return redirect(url_for("auth.register"))
 
-    user = User(username=form.username.data, password=form.password.data)
-    db.session.add(user)
-    db.session.commit()
+    add_user(username=form.username.data, password=form.password.data)
 
     return redirect(url_for("auth.login"))
 
@@ -46,7 +44,7 @@ def login_post():
     if not form.validate_and_flash_errors():
         return redirect(url_for("auth.login"))
 
-    user = User.query.filter_by(username=form.username.data).first()
+    user = by_username(form.username.data)
 
     if not user or not check_password_hash(user.password, form.password.data):
         flash("Incorrect credentials")

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="title">Manage site</h1>
+    <div class="tabs is-toggle is-fullwidth">
+        <ul>
+            {% if current_user.is_admin() %}
+                <li class="{{ "is-active" if url_for("admin.users") in request.path else "" }}">
+                    <a href="{{ url_for("admin.users") }}">
+                    <span class="icon is-small">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </span>
+                        <span>Users</span>
+                    </a>
+                </li>
+            {% endif %}
+            <li class="{{ "is-active" if url_for("admin.communities") in request.path else "" }}">
+                <a href="{{ url_for("admin.communities") }}">
+                    <span class="icon is-small">
+                        <i class="fas fa-comments" aria-hidden="true"></i>
+                    </span>
+                    <span>Communities</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <br/>
+    {% block admin_content %}
+    {% endblock %}
+{% endblock %}
