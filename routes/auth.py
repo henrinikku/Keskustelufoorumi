@@ -18,11 +18,11 @@ def register():
 def register_post():
     form = RegisterForm(request.form)
 
-    if not form.validate():
-        form.flash_errors()
+    if not form.validate_and_flash_errors():
         return redirect(url_for("auth.register"))
 
     existing_user = User.query.filter_by(username=form.username.data).first()
+    
     if existing_user:
         flash("Username is taken")
         return redirect(url_for("auth.register"))
@@ -43,11 +43,11 @@ def login():
 def login_post():
     form = LoginForm(request.form)
 
-    if not form.validate():
-        form.flash_errors()
+    if not form.validate_and_flash_errors():
         return redirect(url_for("auth.login"))
 
     user = User.query.filter_by(username=form.username.data).first()
+
     if not user or not check_password_hash(user.password, form.password.data):
         flash("Incorrect credentials")
         return redirect(url_for("auth.login"))

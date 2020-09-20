@@ -20,6 +20,13 @@ class BaseForm(FlaskForm):
         for error in self._format_errors():
             flash(error)
 
+    def validate_and_flash_errors(self, extra_validators=None):
+        result = self.validate(extra_validators)
+        if not result:
+            self.flash_errors()
+
+        return result
+
 
 class StyledStringField(StringField):
     def __init__(self, *args, **kwargs):
