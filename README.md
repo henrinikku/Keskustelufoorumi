@@ -1,5 +1,7 @@
 # Keskustelufoorumi
-Sovelluksen avulla käyttäjät voivat luoda ja käsitellä aihealueita/kategorioita, ja keskustella niiden alla. 
+Sovelluksen avulla käyttäjät voivat luoda ja käsitellä aihealueita/kategorioita sekä keskustella niiden alla. 
+
+https://keskustelufoorumi123.herokuapp.com
 
 ## Tilanne 20.09.2020
 Sovellus on vielä todella keskeneräinen. Toteutettuna on käytännössä ainastaan rekisteröityminen, kirjautuminen ja (admin-käyttäjällä) käyttäjien poistaminen.
