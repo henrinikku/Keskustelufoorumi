@@ -1,4 +1,4 @@
-from db import db
+from plugins.db import db
 
 
 class BaseModel(db.Model):

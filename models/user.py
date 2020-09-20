@@ -3,7 +3,7 @@ import enum
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash
 
-from db import db
+from plugins.db import db
 from . import BaseModel
 
 
@@ -30,7 +30,12 @@ class User(BaseModel, UserMixin):
         super(User, self).__init__(password=hashed_password, **kwargs)
 
     def is_admin(self):
-        return self.role == UserRole.admin
+        return self.is_authenticated and self.role == UserRole.admin
 
     def is_premium(self):
-        return self.role in [UserRole.admin, UserRole.premium]
+        return self.is_authenticated and self.role in [
+            UserRole.admin, UserRole.premium
+        ]
+
+    def is_normal(self):
+        return self.is_authenticated

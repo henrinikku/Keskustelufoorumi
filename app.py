@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 from flask import Flask
 from werkzeug.utils import import_string
 
-from db import db
-from login_manager import login_manager
+from plugins.db import db
+from plugins.login_manager import login_manager
 from routes import root, auth, admin
 
 load_dotenv()

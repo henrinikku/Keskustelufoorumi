@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template
-from flask_login import login_required
+from decorators.permissions import is_normal_user
 
 root = Blueprint("root", __name__)
 
 
 @root.route("/")
-@login_required
+@is_normal_user
 def index():
     return render_template("index.html")
