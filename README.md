@@ -6,6 +6,7 @@ Sovellus on vielä todella keskeneräinen. Toteutettuna on käytännössä ainas
 
 ## Admin-tunnukset testausta varten
 Käyttäjänimi: admin
+
 Salasana: testi123
 
 ## Toiminnallisuus
