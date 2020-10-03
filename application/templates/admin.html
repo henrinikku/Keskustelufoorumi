@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="title">Manage site</h1>
-    <div class="tabs is-toggle is-fullwidth">
+    <h1 class="title">{{ title or "Manage site" }}</h1>
+    <div class="tabs is-toggle is-centered">
         <ul>
             {% if current_user.is_admin() %}
                 <li class="{{ "is-active" if url_for("admin.users") in request.path else "" }}">

@@ -14,7 +14,7 @@
                     </div>
                 {% endif %}
             {% endwith %}
-            <form method="POST" action="{{ url_for('auth.login') }}">
+            <form method="POST" action="{{ url_for("auth.login") }}">
                 <div class="field">
                     <div class="control">
                         {{ form.username }}

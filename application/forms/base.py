@@ -1,6 +1,6 @@
 from flask import flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField
 
 
 class BaseForm(FlaskForm):
@@ -26,6 +26,13 @@ class BaseForm(FlaskForm):
             self.flash_errors()
 
         return result
+
+
+class StyledSelectField(SelectField):
+    def __init__(self, *args, **kwargs):
+        """This acts as a placeholder for now"""
+
+        super(StyledSelectField, self).__init__(*args, **kwargs)
 
 
 class StyledStringField(StringField):

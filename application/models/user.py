@@ -13,6 +13,17 @@ class UserRole(enum.Enum):
     premium = 2
     admin = 3
 
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def choices(cls):
+        return [(field.name, field.name.capitalize()) for field in cls]
+
+    @classmethod
+    def coerce(cls, obj):
+        return obj if isinstance(obj, UserRole) else UserRole[obj]
+
 
 class User(BaseModel, UserMixin):
     __tablename__ = "User"
