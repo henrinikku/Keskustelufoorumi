@@ -1,5 +1,36 @@
 {% extends "admin.html" %}
 
 {% block admin_content %}
-    TODO Community management
+    <div class="card-table">
+        <div class="content">
+            <div class="has-text-right mb-4">
+                <a class="button is-link is-outlined"
+                   href="{{ url_for("admin.edit_community", id=0) }}">
+                    Add new
+                </a>
+            </div>
+            <table class="table is-fullwidth is-striped">
+                <tbody>
+                {% for community in communities %}
+                    <tr>
+                        <td width="5%"><i class="fa fa-comments"></i></td>
+                        <td align="left">{{ community.name }}</td>
+                        <td align="right">
+                            <a class="button is-small is-info"
+                               href="{{ url_for("admin.edit_community", id=community.id) }}">
+                                Edit
+                            </a>
+                        </td>
+                        <td align="right">
+                            <a class="button is-small is-danger"
+                               href="{{ url_for("admin.delete_community", id=community.id) }}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

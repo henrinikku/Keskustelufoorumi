@@ -3,8 +3,13 @@ from flask_login import current_user
 
 from application.db import db
 from application.decorators.permissions import is_admin_user, is_premium_user
-from application.forms.user import UserForm
+from application.forms.admin import UserForm, CategoryForm
+from application.models import Category
 from application.queries import user as user_queries
+from application.queries.category import (
+    by_user, by_id, delete_category,
+    add_or_update,
+)
 
 admin = Blueprint("admin", __name__)
 
@@ -19,8 +24,9 @@ def index():
 @is_admin_user
 def users():
     users = user_queries.all_users_except(current_user.id).all()
+
     return render_template(
-        "admin_users.html", title="Manage Users", users=users
+        "admin_users.html", title="Manage users", users=users
     )
 
 
@@ -39,8 +45,10 @@ def edit_user(id):
         return redirect(url_for("admin.users"))
 
     return render_template(
-        "admin_edit_user.html", title=f"Edit User {user.username}",
-        id=id, form=form
+        "admin_edit_user.html",
+        title=f"Edit user {user.username}",
+        id=id,
+        form=form
     )
 
 
@@ -56,4 +64,36 @@ def delete_user(id):
 @admin.route("/community")
 @is_premium_user
 def communities():
-    return render_template("admin_communities.html", title="Manage Communities")
+    categories = by_user(current_user).all()
+
+    return render_template(
+        "admin_communities.html",
+        title="Manage communities",
+        communities=categories
+    )
+
+
+@admin.route("/community/<id>/edit", methods=["GET", "POST"])
+@is_premium_user
+def edit_community(id):
+    category = by_id(id) or Category()
+    form = CategoryForm(obj=category)
+
+    if request.method == "POST" and form.validate_and_flash_errors():
+        form.populate_obj(category)
+        category.user_id = current_user.id
+        add_or_update(category)
+        return redirect(url_for("admin.communities"))
+
+    title = f"Edit community {category.name}" if category.name else "Add community"
+
+    return render_template(
+        "admin_edit_community.html", title=title, id=id, form=form
+    )
+
+
+@admin.route("/community/<id>/delete")
+@is_premium_user
+def delete_community(id):
+    delete_category(id)
+    return redirect(url_for("admin.communities"))

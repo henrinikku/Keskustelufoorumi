@@ -3,3 +3,16 @@
         {{ text }}
     </a>
 {% endmacro %}
+
+{% macro errors() %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {% for message in messages %}
+                    {{ message }}
+                    <br/>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+{% endmacro %}
