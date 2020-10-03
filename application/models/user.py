@@ -23,6 +23,11 @@ class User(BaseModel, UserMixin):
         db.Enum(UserRole), nullable=False,
         default=UserRole.normal.name, server_default=UserRole.normal.name,
     )
+    categories = db.relationship("Category", back_populates="user", lazy=True)
+    conversations = db.relationship(
+        "Conversation", back_populates="user", lazy=True
+    )
+    messages = db.relationship("Message", back_populates="user", lazy=True)
 
     def __init__(self, **kwargs):
         password = kwargs.pop("password")
