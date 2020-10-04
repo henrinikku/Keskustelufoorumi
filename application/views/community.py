@@ -9,6 +9,10 @@ from application.queries.conversation import (
     by_id_with_messages_and_users,
     delete_conversation as delete_conversation_from_db, by_id,
 )
+from application.queries.message import (
+    by_id as message_by_id,
+    delete_message as delete_message_from_db,
+)
 
 community = Blueprint("community", __name__)
 
@@ -64,3 +68,12 @@ def conversation(id):
         form=form,
         conversation=conversation
     )
+
+
+@community.route("/message/<int:id>/delete")
+@is_admin_user
+def delete_message(id):
+    message = message_by_id(id)
+    conversation_id = message.conversation_id
+    delete_message_from_db(id)
+    return redirect(url_for("community.conversation", id=conversation_id))

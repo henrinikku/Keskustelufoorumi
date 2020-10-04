@@ -22,6 +22,16 @@
         </form>
         {% for message in conversation.messages %}
             <hr/>
+            {% if current_user.is_admin() %}
+                <div class="has-text-right">
+                    <a class="button is-small is-danger is-outlined"
+                        href="{{ url_for("community.delete_message", id=message.id) }}">
+                        <span class="icon is-small">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </a>
+                </div>
+            {% endif %}
             <p class="is-size-6 has-text-weight-bold">
                 {{ message }}
             </p>
