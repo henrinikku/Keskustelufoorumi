@@ -3,8 +3,10 @@ Sovelluksen avulla käyttäjät voivat luoda ja käsitellä aihealueita/kategori
 
 https://keskustelufoorumi123.herokuapp.com
 
-## Tilanne 20.09.2020
-Sovellus on vielä todella keskeneräinen. Toteutettuna on käytännössä ainastaan rekisteröityminen, kirjautuminen ja (admin-käyttäjällä) käyttäjien poistaminen.
+## Tilanne 04.10.2020
+Toteutetut ominaisuudet merkitty alempana. Toteuttamattomien ominaisuuksien lisäksi pitää vielä ainakin
+- Parannella ulkoasua (nyt esim. pitkät virheilmoitukset venyttävät lomakkeita)
+- Tehdä joku navigointivalikko tai vastaava. Tällä hetkellä esim. keskustelusta ei pääse taaksepäin muuten kuin selaimen takaisin-painikkeella.
 
 ## Admin-tunnukset testausta varten
 Käyttäjänimi: admin
@@ -29,4 +31,4 @@ Ylläpitäjät voivat tehdä kaiken mitä premium-käyttäjät, ja lisäksi
 - [x] poistaa käyttäjiä
 - [x] poistaa aihealueita
 - [x] poistaa ketjuja
-- [ ] poistaa viestejä
+- [x] poistaa viestejä
