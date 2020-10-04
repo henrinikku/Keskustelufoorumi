@@ -9,6 +9,7 @@ class BaseConfig(ABC):
     DEBUG = False
     DEVELOPMENT = False
     CSRF_ENABLED = True
+    SQLALCHEMY_ECHO = False
     SECRET_KEY = os.environ.get("SECRET_KEY")
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -18,6 +19,7 @@ class BaseConfig(ABC):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     DEVELOPMENT = True
+    SQLALCHEMY_ECHO = True
     REMEMBER_COOKIE_DURATION = timedelta(minutes=5)
 
 

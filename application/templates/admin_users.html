@@ -3,14 +3,14 @@
 {% block admin_content %}
     <div class="card-table">
         <div class="content">
-            <table class="table is-fullwidth is-striped">
+            <table class="table is-fullwidth">
                 <tbody>
                 {% for user in users %}
                     <tr>
                         <td width="5%"><i class="fa fa-user"></i></td>
                         <td align="left">{{ user.username }}</td>
                         <td align="right">
-                            <a class="button is-small is-info"
+                            <a class="button is-small is-link"
                                href="{{ url_for("admin.edit_user", id=user.id) }}">
                                 Edit
                             </a>

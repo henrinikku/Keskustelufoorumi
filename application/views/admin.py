@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, request
+from flask import Blueprint, render_template, url_for, redirect, request, flash
 from flask_login import current_user
 
 from application.db import db
@@ -6,9 +6,9 @@ from application.decorators.permissions import is_admin_user, is_premium_user
 from application.forms.admin import UserForm, CategoryForm
 from application.models import Category
 from application.queries import user as user_queries
+from application.queries.generic import add_or_update
 from application.queries.category import (
-    by_user, by_id, delete_category,
-    add_or_update,
+    editable_by_user, by_id, delete_category, by_name,
 )
 
 admin = Blueprint("admin", __name__)
@@ -64,7 +64,7 @@ def delete_user(id):
 @admin.route("/community")
 @is_premium_user
 def communities():
-    categories = by_user(current_user).all()
+    categories = editable_by_user(current_user).all()
 
     return render_template(
         "admin_communities.html",
@@ -80,10 +80,13 @@ def edit_community(id):
     form = CategoryForm(obj=category)
 
     if request.method == "POST" and form.validate_and_flash_errors():
-        form.populate_obj(category)
-        category.user_id = current_user.id
-        add_or_update(category)
-        return redirect(url_for("admin.communities"))
+        existing_category = by_name(form.name.data)
+        if existing_category and existing_category.id != int(id):
+            flash("Community name is taken")
+        else:
+            category.user_id = category.user_id or current_user.id
+            form.save(category)
+            return redirect(url_for("admin.communities"))
 
     title = f"Edit community {category.name}" if category.name else "Add community"
 

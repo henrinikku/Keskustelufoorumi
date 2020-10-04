@@ -6,7 +6,7 @@ from werkzeug.utils import import_string
 
 from application.db import db
 from application.login_manager import login_manager
-from application.views import root, auth, admin
+from application.views import root, auth, admin, community
 
 load_dotenv()
 
@@ -26,3 +26,4 @@ login_manager.init_app(app)
 app.register_blueprint(root)
 app.register_blueprint(auth, url_prefix="/auth")
 app.register_blueprint(admin, url_prefix="/admin")
+app.register_blueprint(community, url_prefix="/community")

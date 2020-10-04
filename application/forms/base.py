@@ -1,6 +1,11 @@
 from flask import flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms import (
+    StringField, PasswordField, SubmitField, SelectField,
+    TextAreaField,
+)
+
+from application.queries.generic import add_or_update
 
 
 class BaseForm(FlaskForm):
@@ -27,6 +32,10 @@ class BaseForm(FlaskForm):
 
         return result
 
+    def save(self, obj):
+        self.populate_obj(obj)
+        add_or_update(obj)
+
 
 class StyledSelectField(SelectField):
     def __init__(self, *args, **kwargs):
@@ -46,6 +55,20 @@ class StyledStringField(StringField):
             "placeholder": label,
         }
         super(StyledStringField, self).__init__(
+            render_kw=attributes, *args, **kwargs
+        )
+
+
+class StyledTextAreaField(TextAreaField):
+    def __init__(self, *args, **kwargs):
+        label = kwargs.get("label") or args[0] or ""
+        render_kw = kwargs.pop("render_kw", {})
+        attributes = {
+            **render_kw,
+            "class": "textarea",
+            "placeholder": label,
+        }
+        super(StyledTextAreaField, self).__init__(
             render_kw=attributes, *args, **kwargs
         )
 
@@ -70,7 +93,7 @@ class StyledSubmitField(SubmitField):
         render_kw = kwargs.pop("render_kw", {})
         attributes = {
             **render_kw,
-            "class": "button is-block is-info is-fullwidth",
+            "class": "button is-block is-link is-fullwidth",
         }
         super(StyledSubmitField, self).__init__(
             render_kw=attributes, *args, **kwargs

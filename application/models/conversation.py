@@ -8,7 +8,8 @@ class Conversation(BaseModel):
     title = db.Column(db.String(), nullable=False)
     message = db.Column(db.String())
     messages = db.relationship(
-        "Message", back_populates="conversation", lazy=True
+        "Message", back_populates="conversation",
+        lazy=True, order_by="Message.created.desc()"
     )
 
     user_id = db.Column(db.Integer, db.ForeignKey("User.id"))
