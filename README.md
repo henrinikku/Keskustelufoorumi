@@ -29,4 +29,4 @@ Ylläpitäjät voivat tehdä kaiken mitä premium-käyttäjät, ja lisäksi
 - [x] poistaa käyttäjiä
 - [x] poistaa aihealueita
 - [x] poistaa ketjuja
-- poistaa viestejä
+- [ ] poistaa viestejä
