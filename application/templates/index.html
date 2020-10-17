@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "components.html" import errors with context %}
 
 {% block title %}
 
@@ -8,6 +9,46 @@
     <h3>
         Logged in as {{ current_user.role.name }} user
     </h3>
+    <div class="content-has-text-left mt-5">
+        <h3 class="title is-3">Search conversations</h3>
+        {{ errors() }}
+        <form class="has-text-left" method="POST"
+              action="{{ url_for("root.index") }}">
+            <div class="field">
+                <div class="control">
+                    {{ search_form.keyword }}
+                </div>
+            </div>
+            {{ search_form.submit }}
+        </form>
+
+        {% if conversations %}
+            <br/>
+            <table class="table is-fullwidth">
+                <tbody>
+                {% for conversation in conversations %}
+                    <tr>
+                        <td width="5%"><i class="fa fa-comments"></i></td>
+                        <td align="left">
+                            {{ conversation.category.name }}
+                            / {{ conversation.title }}
+                        </td>
+                        <td align="right">
+                            <a class="button is-small is-link"
+                               href="{{ url_for("community.conversation", id=conversation.id) }}">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% elif search %}
+            <br/>
+            <h4 class="is-4 has-text-left">No results :(</h4>
+        {% endif %}
+    </div>
+
     <div class="content has-text-left mt-5">
         <h3 class="title is-3">Communities</h3>
         <table class="table is-fullwidth">

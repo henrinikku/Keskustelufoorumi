@@ -4,6 +4,16 @@ from application.db import db
 from application.models import Conversation, Message
 
 
+def search_by_keyword(keyword):
+    title = f"%{keyword}%"
+    return (
+        Conversation
+            .query
+            .filter(Conversation.title.like(title))
+            .order_by(Conversation.created.desc())
+    )
+
+
 def by_id(id):
     return Conversation.query.get(id)
 

@@ -6,7 +6,6 @@ from application.decorators.permissions import is_admin_user, is_premium_user
 from application.forms.admin import UserForm, CategoryForm
 from application.models import Category
 from application.queries import user as user_queries
-from application.queries.generic import add_or_update
 from application.queries.category import (
     editable_by_user, by_id, delete_category, by_name,
 )
