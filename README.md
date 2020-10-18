@@ -18,6 +18,8 @@ SECRET_KEY=<avain>
 Ensimmäinen admin-käyttäjä pitää tehdä luomalla peruskäyttäjä ja antamalla sille tietokannassa admin-rooli käsin. En jaksanut tehdä mitään komentorivityökalua tms. tätä varten, kun käsittääkseni ei ole tarkoituksena, että arvostelijat ajavat näitä omilla koneillaan.
 
 ## Toiminnallisuus
+Listauksissa ei ole paginaatiota tai vastaavaa, mutta ne kaikki toimivat nopeasti ainakin muutamaan tuhanteen riviin asti. Sitä suuremmilla tietomäärillä en ole testaillut sovellusta.
+
 Sovelluksessa on ainakin kolme käyttäjäroolia, _peruskäyttäjä_, _premium-käyttäjä_ ja _ylläpitäjä_. Rekisteröitymisen yhteydessä luodaan peruskäyttäjä.
 
 Peruskäyttäjät voivat
@@ -28,7 +30,7 @@ Peruskäyttäjät voivat
 
 Premium-käyttäjät voivat tehdä kaiken mitä peruskäyttäjät, ja lisäksi
 - [x] luoda ja muokata omia aihealueitaan
-- [ ] hallinnoida luomiensa aihealueiden käyttöoikeuksia (ainakin aluksi pelkästään käyttäjäkohtaisesti)
+- [x] hallinnoida luomiensa aihealueiden käyttöoikeuksia (ainakin aluksi pelkästään käyttäjäkohtaisesti)
 
 Ylläpitäjät voivat tehdä kaiken mitä premium-käyttäjät, ja lisäksi
 - [x] ylentää tai alentaa käyttäjiä (esim. peruskäyttäjä -> premium-käyttäjä)
