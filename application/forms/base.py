@@ -4,11 +4,10 @@ from wtforms import (
     StringField, PasswordField, SubmitField, SelectField,
     TextAreaField,
 )
+from wtforms import widgets
 from wtforms.ext.sqlalchemy.fields import (
-    QuerySelectField,
     QuerySelectMultipleField,
 )
-from wtforms import widgets
 
 from application.queries.generic import add_or_update
 
