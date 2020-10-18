@@ -12,7 +12,7 @@ Salasana: testi123
 Sovelluksessa on ainakin kolme käyttäjäroolia, _peruskäyttäjä_, _premium-käyttäjä_ ja _ylläpitäjä_. Rekisteröitymisen yhteydessä luodaan peruskäyttäjä.
 
 Peruskäyttäjät voivat
-- [ ] hakea keskusteluita esimerkiksi avainsanojen perusteella
+- [x] hakea keskusteluita esimerkiksi avainsanojen perusteella
 - [x] aloittaa keskusteluita
 - [x] vastata keskusteluihin
 - [ ] muokata vastauksiaan
