@@ -30,5 +30,7 @@ def add_user(**kwargs):
 def delete_user(user_id):
     user = by_id(user_id)
     if user:
+        user.banned_categories = []
+        db.session.commit()
         db.session.delete(user)
         db.session.commit()

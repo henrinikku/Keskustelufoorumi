@@ -6,6 +6,7 @@
     {{ errors() }}
     <form class="has-text-left" method="POST"
           action="{{ url_for("community.create_conversation", community_id=community_id) }}">
+        {{ form.csrf_token }}
         {{ form.title.label(class_="label") }}
         <div class="field">
             <div class="control">

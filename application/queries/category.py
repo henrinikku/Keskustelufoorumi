@@ -80,5 +80,7 @@ def editable_by_user(user):
 def delete_category(category_id):
     category = by_id(category_id)
     if category:
+        category.banned_users = []
+        db.session.commit()
         db.session.delete(category)
         db.session.commit()

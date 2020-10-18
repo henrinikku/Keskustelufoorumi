@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask
 from werkzeug.utils import import_string
 
+from application.csrf import csrf
 from application.db import db
 from application.login_manager import login_manager
 from application.views import root, auth, admin, community
@@ -21,6 +22,9 @@ db.init_app(app)
 
 # Register login manager
 login_manager.init_app(app)
+
+# Enable CSRF protection
+csrf.init_app(app)
 
 # Register routes
 app.register_blueprint(root)

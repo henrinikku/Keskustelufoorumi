@@ -14,7 +14,7 @@ from application.queries.generic import add_or_update
 
 class BaseForm(FlaskForm):
     class Meta:
-        csrf = False
+        csrf = True
 
     def _format_errors(self):
         if not self.errors:
