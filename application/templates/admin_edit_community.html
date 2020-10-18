@@ -11,6 +11,12 @@
                 {{ form.name }}
             </div>
         </div>
+        <div class="field">
+            {{ form.banned_users.label(class_="label") }}
+            <div class="control">
+                {{ form.banned_users(class_="checkbox") }}
+            </div>
+        </div>
         {{ form.submit }}
     </form>
 {% endblock %}

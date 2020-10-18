@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect, request, flash
 from flask_login import current_user
 
 from application.db import db
-from application.decorators.permissions import is_admin_user, is_premium_user
+from application.permissions.decorators import is_admin_user, is_premium_user
 from application.forms.admin import UserForm, CategoryForm
 from application.models import Category
 from application.queries import user as user_queries
@@ -87,7 +87,10 @@ def edit_community(id):
             form.save(category)
             return redirect(url_for("admin.communities"))
 
-    title = f"Edit community {category.name}" if category.name else "Add community"
+    title = (
+        f"Edit community {category.name}" if category.name
+        else "Add community"
+    )
 
     return render_template(
         "admin_edit_community.html", title=title, id=id, form=form

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 from flask_login import current_user
 
-from application.decorators.permissions import is_normal_user
+from application.permissions.decorators import is_normal_user
 from application.forms.search import SearchForm
 from application.queries.category import readable_by_user
 from application.queries.conversation import search_by_keyword

@@ -1,14 +1,17 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import current_user
 
-from application.decorators.permissions import is_normal_user, is_admin_user
 from application.forms.conversation import (
     ConversationForm, MessageForm,
     EditMessageForm,
 )
 from application.login_manager import login_manager
 from application.models import Conversation, Message
-from application.queries.category import by_id_with_conversations
+from application.permissions.decorators import is_normal_user, is_admin_user
+from application.queries.category import (
+    by_id_with_conversations,
+    user_is_banned_from,
+)
 from application.queries.conversation import (
     by_id_with_messages_and_users,
     delete_conversation as delete_conversation_from_db, by_id,
@@ -32,6 +35,10 @@ def index(id):
 @community.route("/<int:community_id>/conversation", methods=["GET", "POST"])
 @is_normal_user
 def create_conversation(community_id):
+    banned = user_is_banned_from(current_user.id, community_id)
+    if banned:
+        return login_manager.unauthorized()
+
     form = ConversationForm()
     if request.method == "POST" and form.validate_and_flash_errors():
         conversation = Conversation(

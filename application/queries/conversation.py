@@ -1,7 +1,9 @@
+from flask_login import current_user
+from sqlalchemy import not_
 from sqlalchemy.orm import joinedload
 
 from application.db import db
-from application.models import Conversation, Message
+from application.models import Conversation, Message, Category, User
 
 
 def search_by_keyword(keyword):
@@ -9,6 +11,8 @@ def search_by_keyword(keyword):
     return (
         Conversation
             .query
+            .filter(not_(Conversation.category.has(
+            Category.banned_users.any(User.id == current_user.id))))
             .filter(Conversation.title.like(title))
             .order_by(Conversation.created.desc())
     )
@@ -24,7 +28,10 @@ def by_id_with_messages_and_users(id):
             .query
             .options(joinedload(Conversation.user))
             .options(joinedload(Conversation.messages).joinedload(Message.user))
-            .get(id)
+            .filter(not_(Conversation.category.has(
+            Category.banned_users.any(User.id == current_user.id))))
+            .filter(Conversation.id == id)
+            .first()
     )
 
 

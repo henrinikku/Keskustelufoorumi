@@ -5,9 +5,10 @@ from werkzeug.security import generate_password_hash
 
 from application.db import db
 from . import BaseModel
-
-
 # Names, not values, are persisted
+from .category import BannedUser
+
+
 class UserRole(enum.Enum):
     normal = 1
     premium = 2
@@ -39,6 +40,9 @@ class User(BaseModel, UserMixin):
         "Conversation", back_populates="user", lazy=True
     )
     messages = db.relationship("Message", back_populates="user", lazy=True)
+    banned_categories = db.relationship(
+        "Category", secondary=BannedUser, backref="User"
+    )
 
     def __init__(self, **kwargs):
         password = kwargs.pop("password")

@@ -4,6 +4,11 @@ from wtforms import (
     StringField, PasswordField, SubmitField, SelectField,
     TextAreaField,
 )
+from wtforms.ext.sqlalchemy.fields import (
+    QuerySelectField,
+    QuerySelectMultipleField,
+)
+from wtforms import widgets
 
 from application.queries.generic import add_or_update
 
@@ -35,6 +40,16 @@ class BaseForm(FlaskForm):
     def save(self, obj):
         self.populate_obj(obj)
         add_or_update(obj)
+
+
+class StyledQueryMultiSelectField(QuerySelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
+
+    def __init__(self, *args, **kwargs):
+        """This acts as a placeholder for now"""
+
+        super(StyledQueryMultiSelectField, self).__init__(*args, **kwargs)
 
 
 class StyledSelectField(SelectField):

@@ -1,7 +1,12 @@
+from flask_login import current_user
 from sqlalchemy import not_
 
 from application.db import db
 from application.models import User
+
+
+def all_users_except_current():
+    return all_users_except(current_user.id)
 
 
 def all_users_except(user_id):
