@@ -15,6 +15,7 @@ DATABASE_URL=postgresql:///<tietokanta>
 APP_SETTINGS=<config.DevelopmentConfig|config.ProductionConfig>
 SECRET_KEY=<avain>
 ```
+Ensimmäinen admin-käyttäjä pitää tehdä luomalla peruskäyttäjä ja antamalla sille tietokannassa admin-rooli käsin. En jaksanut tehdä mitään komentorivityökalua tms. tätä varten, kun käsittääkseni ei ole tarkoituksena, että arvostelijat ajavat näitä omilla koneillaan.
 
 ## Toiminnallisuus
 Sovelluksessa on ainakin kolme käyttäjäroolia, _peruskäyttäjä_, _premium-käyttäjä_ ja _ylläpitäjä_. Rekisteröitymisen yhteydessä luodaan peruskäyttäjä.
@@ -23,7 +24,7 @@ Peruskäyttäjät voivat
 - [x] hakea keskusteluita esimerkiksi avainsanojen perusteella
 - [x] aloittaa keskusteluita
 - [x] vastata keskusteluihin
-- [ ] muokata vastauksiaan
+- [x] muokata vastauksiaan
 
 Premium-käyttäjät voivat tehdä kaiken mitä peruskäyttäjät, ja lisäksi
 - [x] luoda ja muokata omia aihealueitaan
