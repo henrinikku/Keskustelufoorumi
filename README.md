@@ -8,6 +8,14 @@ Käyttäjänimi: admin
 
 Salasana: testi123
 
+## Sovelluksen ajaminen paikallisesti
+Asenna riippuvuudet requirements.txt tiedostosta ja luo projektin juureen .env -tiedosto seuraavilla avaimilla
+```
+DATABASE_URL=postgresql:///<tietokanta>
+APP_SETTINGS=<config.DevelopmentConfig|config.ProductionConfig>
+SECRET_KEY=<avain>
+```
+
 ## Toiminnallisuus
 Sovelluksessa on ainakin kolme käyttäjäroolia, _peruskäyttäjä_, _premium-käyttäjä_ ja _ylläpitäjä_. Rekisteröitymisen yhteydessä luodaan peruskäyttäjä.
 
