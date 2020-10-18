@@ -11,7 +11,8 @@
         <hr/>
         {{ errors() }}
         <form class="has-text-left" method="POST"
-              action="{{ url_for("community.conversation", id=conversation.id) }}">
+              action="{{ (url_for("community.edit_message", id=editing_message.id) if editing_message
+                    else url_for("community.conversation", id=conversation.id)) }}">
             {{ form.message.label(class_="label") }}
             <div class="field">
                 <div class="control">
@@ -20,16 +21,27 @@
             </div>
             {{ form.submit }}
         </form>
-        {% for message in conversation.messages %}
+        {% for message in conversation.messages if not editing_message or message.id != editing_message.id %}
             <hr/>
-            {% if current_user.is_admin() %}
+
+            {% if current_user.is_admin() or current_user.id == message.user_id %}
                 <div class="has-text-right">
-                    <a class="button is-small is-danger is-outlined"
-                        href="{{ url_for("community.delete_message", id=message.id) }}">
+                    {% if current_user.id == message.user_id %}
+                        <a class="button is-small is-link is-outlined"
+                           href="{{ url_for("community.edit_message", id=message.id) }}">
+                        <span class="icon is-small">
+                            <i class="fas fa-pen"></i>
+                        </span>
+                        </a>
+                    {% endif %}
+                    {% if current_user.is_admin %}
+                        <a class="button is-small is-danger is-outlined"
+                           href="{{ url_for("community.delete_message", id=message.id) }}">
                         <span class="icon is-small">
                             <i class="fas fa-times"></i>
                         </span>
-                    </a>
+                        </a>
+                    {% endif %}
                 </div>
             {% endif %}
             <p class="is-size-6 has-text-weight-bold">

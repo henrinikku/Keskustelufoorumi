@@ -2,7 +2,11 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import current_user
 
 from application.decorators.permissions import is_normal_user, is_admin_user
-from application.forms.conversation import ConversationForm, MessageForm
+from application.forms.conversation import (
+    ConversationForm, MessageForm,
+    EditMessageForm,
+)
+from application.login_manager import login_manager
 from application.models import Conversation, Message
 from application.queries.category import by_id_with_conversations
 from application.queries.conversation import (
@@ -12,6 +16,7 @@ from application.queries.conversation import (
 from application.queries.message import (
     by_id as message_by_id,
     delete_message as delete_message_from_db,
+    by_id_with_conversation as message_by_id_with_conversation,
 )
 
 community = Blueprint("community", __name__)
@@ -56,6 +61,7 @@ def delete_conversation(id):
 @is_normal_user
 def conversation(id):
     form = MessageForm()
+
     if request.method == "POST" and form.validate_and_flash_errors():
         message = Message(user_id=current_user.id, conversation_id=id)
         form.save(message)
@@ -67,6 +73,29 @@ def conversation(id):
         "conversation.html",
         form=form,
         conversation=conversation
+    )
+
+
+@community.route("/message/<int:id>/edit", methods=["GET", "POST"])
+@is_normal_user
+def edit_message(id):
+    message = message_by_id_with_conversation(id)
+    if message.user_id != current_user.id:
+        return login_manager.unauthorized()
+
+    form = EditMessageForm(obj=message)
+
+    if request.method == "POST" and form.validate_and_flash_errors():
+        form.save(message)
+        return redirect(
+            url_for("community.conversation", id=message.conversation_id)
+        )
+
+    return render_template(
+        "conversation.html",
+        form=form,
+        conversation=message.conversation,
+        editing_message=message
     )
 
 

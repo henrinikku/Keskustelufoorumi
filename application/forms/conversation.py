@@ -21,3 +21,11 @@ class MessageForm(BaseForm):
         [validators.DataRequired(), validators.Length(min=3)]
     )
     submit = StyledSubmitField("Send message")
+
+
+class EditMessageForm(BaseForm):
+    message = StyledTextAreaField(
+        "Edit message",
+        [validators.DataRequired(), validators.Length(min=3)]
+    )
+    submit = StyledSubmitField("Submit changes")
