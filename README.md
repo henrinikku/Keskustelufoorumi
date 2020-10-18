@@ -3,11 +3,6 @@ Sovelluksen avulla käyttäjät voivat luoda ja käsitellä aihealueita/kategori
 
 https://keskustelufoorumi123.herokuapp.com
 
-## Tilanne 04.10.2020
-Toteutetut ominaisuudet merkitty alempana. Toteuttamattomien ominaisuuksien lisäksi pitää vielä ainakin
-- Parannella ulkoasua (nyt esim. pitkät virheilmoitukset venyttävät lomakkeita)
-- Tehdä joku navigointivalikko tai vastaava. Tällä hetkellä esim. keskustelusta ei pääse taaksepäin muuten kuin selaimen takaisin-painikkeella.
-
 ## Admin-tunnukset testausta varten
 Käyttäjänimi: admin
 
