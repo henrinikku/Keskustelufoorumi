@@ -15,7 +15,6 @@ DATABASE_URL=postgresql:///<tietokanta>
 APP_SETTINGS=<config.DevelopmentConfig|config.ProductionConfig>
 SECRET_KEY=<avain>
 ```
-Ensimmäinen admin-käyttäjä pitää tehdä luomalla peruskäyttäjä ja antamalla sille tietokannassa admin-rooli käsin. En jaksanut tehdä mitään komentorivityökalua tms. tätä varten, kun käsittääkseni ei ole tarkoituksena, että arvostelijat ajavat näitä omilla koneillaan.
 
 ## Toiminnallisuus
 Listauksissa ei ole paginaatiota tai vastaavaa, mutta ne kaikki toimivat nopeasti ainakin muutamaan tuhanteen riviin asti. Sitä suuremmilla tietomäärillä en ole testaillut sovellusta.
